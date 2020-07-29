@@ -1,7 +1,8 @@
 import React from "react";
-import {LOCATIONS} from "../../../../../const";
+import {LOCATIONS, TRANSPORTS} from "../../../../../const";
 import Details from "./Details";
 import moment from "moment";
+import flatpickr from "flatpickr";
 
 export default function PointEdit(props) {
 
@@ -29,6 +30,58 @@ export default function PointEdit(props) {
         })
     };
 
+    const createTypesList = () => {
+
+        const createTransferList = () => {
+            return (
+                TRANSPORTS.map((type) => {
+                    const isChecked = props.editablePoint.type === type;
+                    return (
+                        <div className="event__type-item">
+                            <input onChange={(e) => {
+                                props.updateType(e.currentTarget.value);
+                            }} id={`event-type-${type}-1`} className="event__type-input  visually-hidden"
+                                   type="radio" name="event-type" value={type} checked={isChecked} />
+                            <label className={`event__type-label  event__type-label--${type}`}
+                                   htmlFor={`event-type-${type}-1`}>{type}</label>
+                        </div>
+                    )
+                })
+            )
+        };
+
+        const createActivityList = () => {
+            return (
+                LOCATIONS.map((type) => {
+                    const isChecked = props.editablePoint.type === type;
+                    return (
+                        <div className="event__type-item">
+                            <input onChange={(e) => {
+                                props.updateType(e.currentTarget.value);
+                            }} id={`event-type-${type}-1`} className="event__type-input  visually-hidden"
+                                   type="radio" name="event-type" value={type} checked={isChecked} />
+                            <label className={`event__type-label  event__type-label--${type}`}
+                                   htmlFor={`event-type-${type}-1`}>{type}</label>
+                        </div>
+                    )
+                })
+            )
+        };
+
+        return (
+            <div className="event__type-list">
+                <fieldset className="event__type-group">
+                    <legend className="visually-hidden">Transfer</legend>
+                    {createTransferList()}
+                </fieldset>
+                <fieldset className="event__type-group">
+                    <legend className="visually-hidden">Activity</legend>
+                    {createActivityList()}
+                </fieldset>
+            </div>
+        );
+    };
+
     return (
         <li className="trip-events__item">
             <form className="event  event--edit" action="#" method="post">
@@ -40,89 +93,7 @@ export default function PointEdit(props) {
                                  alt="Event type icon" />
                         </label>
                         <input className="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox" />
-
-                            <div className="event__type-list">
-                                <fieldset className="event__type-group">
-                                    <legend className="visually-hidden">Transfer</legend>
-
-                                    <div className="event__type-item">
-                                        <input id="event-type-taxi-1" className="event__type-input  visually-hidden"
-                                               type="radio" name="event-type" value="taxi" />
-                                            <label className="event__type-label  event__type-label--taxi"
-                                                   htmlFor="event-type-taxi-1">Taxi</label>
-                                    </div>
-
-                                    <div className="event__type-item">
-                                        <input id="event-type-bus-1" className="event__type-input  visually-hidden"
-                                               type="radio" name="event-type" value="bus" />
-                                            <label className="event__type-label  event__type-label--bus"
-                                                   htmlFor="event-type-bus-1">Bus</label>
-                                    </div>
-
-                                    <div className="event__type-item">
-                                        <input id="event-type-train-1" className="event__type-input  visually-hidden"
-                                               type="radio" name="event-type" value="train" />
-                                            <label className="event__type-label  event__type-label--train"
-                                                   htmlFor="event-type-train-1">Train</label>
-                                    </div>
-
-                                    <div className="event__type-item">
-                                        <input id="event-type-ship-1" className="event__type-input  visually-hidden"
-                                               type="radio" name="event-type" value="ship" />
-                                            <label className="event__type-label  event__type-label--ship"
-                                                   htmlFor="event-type-ship-1">Ship</label>
-                                    </div>
-
-                                    <div className="event__type-item">
-                                        <input id="event-type-transport-1"
-                                               className="event__type-input  visually-hidden" type="radio"
-                                               name="event-type" value="transport" />
-                                            <label className="event__type-label  event__type-label--transport"
-                                                   htmlFor="event-type-transport-1">Transport</label>
-                                    </div>
-
-                                    <div className="event__type-item">
-                                        <input id="event-type-drive-1" className="event__type-input  visually-hidden"
-                                               type="radio" name="event-type" value="drive" />
-                                            <label className="event__type-label  event__type-label--drive"
-                                                   htmlFor="event-type-drive-1">Drive</label>
-                                    </div>
-
-                                    <div className="event__type-item">
-                                        <input id="event-type-flight-1" className="event__type-input  visually-hidden"
-                                               type="radio" name="event-type" value="flight" checked />
-                                            <label className="event__type-label  event__type-label--flight"
-                                                   htmlFor="event-type-flight-1">Flight</label>
-                                    </div>
-                                </fieldset>
-
-                                <fieldset className="event__type-group">
-                                    <legend className="visually-hidden">Activity</legend>
-
-                                    <div className="event__type-item">
-                                        <input id="event-type-check-in-1" className="event__type-input  visually-hidden"
-                                               type="radio" name="event-type" value="check-in" />
-                                            <label className="event__type-label  event__type-label--check-in"
-                                                   htmlFor="event-type-check-in-1">Check-in</label>
-                                    </div>
-
-                                    <div className="event__type-item">
-                                        <input id="event-type-sightseeing-1"
-                                               className="event__type-input  visually-hidden" type="radio"
-                                               name="event-type" value="sightseeing" />
-                                            <label className="event__type-label  event__type-label--sightseeing"
-                                                   htmlFor="event-type-sightseeing-1">Sightseeing</label>
-                                    </div>
-
-                                    <div className="event__type-item">
-                                        <input id="event-type-restaurant-1"
-                                               className="event__type-input  visually-hidden" type="radio"
-                                               name="event-type" value="restaurant" />
-                                            <label className="event__type-label  event__type-label--restaurant"
-                                                   htmlFor="event-type-restaurant-1">Restaurant</label>
-                                    </div>
-                                </fieldset>
-                            </div>
+                        {createTypesList()}
                     </div>
 
                     <div className="event__field-group  event__field-group--destination">
@@ -141,13 +112,17 @@ export default function PointEdit(props) {
                         <label className="visually-hidden" htmlFor="event-start-time-1">
                             From
                         </label>
-                        <input className="event__input  event__input--time" id="event-start-time-1" type="text"
+                        <input onChange={(e) => {
+                            props.updateDateFrom(e.currentTarget.value)
+                        }} className="event__input  event__input--time" id="event-start-time-1" type="text"
                                name="event-start-time" value={transformDate(props.editablePoint.date_from)} />
                             &mdash;
                             <label className="visually-hidden" htmlFor="event-end-time-1">
                                 To
                             </label>
-                            <input className="event__input  event__input--time" id="event-end-time-1" type="text"
+                            <input onChange={(e) => {
+                                props.updateDateTo(e.currentTarget.value)
+                            }} className="event__input  event__input--time" id="event-end-time-1" type="text"
                                    name="event-end-time" value={transformDate(props.editablePoint.date_to)} />
                     </div>
 
@@ -156,7 +131,9 @@ export default function PointEdit(props) {
                             <span className="visually-hidden">Price</span>
                             &euro;
                         </label>
-                        <input className="event__input  event__input--price" id="event-price-1" type="text"
+                        <input onChange={(e) => {
+                            props.updatePrice(e.currentTarget.value);
+                        }} className="event__input  event__input--price" id="event-price-1" type="text"
                                name="event-price" value={props.editablePoint.base_price} />
                     </div>
 

@@ -28,15 +28,6 @@ export const tripAPI = {
         )
     },
 
-    getTypes: () => {
-        return (
-            instanceAxios.get("types")
-                .then((response) => {
-                    return response.data;
-                })
-        )
-    },
-
     getDestinations: () => {
         return (
             instanceAxios.get("destinations")

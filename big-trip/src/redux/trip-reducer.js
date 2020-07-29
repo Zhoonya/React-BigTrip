@@ -7,7 +7,10 @@ const SET_DESTINATION = "SET_DESTINATION";
 const UNDO_CHANGES = "UNDO_CHANGES";
 const UPDATE_POINT = "UPDATE_POINT";
 const UPDATE_DESTINATION = "UPDATE_DESTINATION";
+const UPDATE_PRICE = "UPDATE_PRICE";
 const UPDATE_TYPE = "UPDATE_TYPE";
+const UPDATE_DATE_FROM = "UPDATE_DATE_FROM";
+const UPDATE_DATE_TO = "UPDATE_DATE_TO";
 const TOGGLE_OFFER = "TOGGLE_OFFER";
 const DELETE_POINT = "DELETE_POINT";
 
@@ -198,12 +201,39 @@ export const tripReducer = (state = initialState, action) => {
             stateCopy.editablePoint.destination = {...destination};
             return stateCopy;
         }
+        case UPDATE_DATE_FROM: {
+            const stateCopy = {
+                ...state,
+                editablePoint: {...state.editablePoint}
+            };
+            stateCopy.editablePoint.date_from = action.date_from;
+            return stateCopy;
+        }
+        case UPDATE_DATE_TO: {
+            const stateCopy = {
+                ...state,
+                editablePoint: {...state.editablePoint}
+            };
+            stateCopy.editablePoint.date_to = String(new Date(action.date_to));
+            return stateCopy;
+        }
+        case UPDATE_PRICE: {
+            const stateCopy = {
+                ...state,
+                editablePoint: {...state.editablePoint}
+            };
+            stateCopy.editablePoint.base_price = Number(action.price);
+            return stateCopy;
+        }
         case UPDATE_TYPE: {
             const stateCopy = {
                 ...state,
                 editablePoint: {...state.editablePoint}
             };
-            stateCopy.editablePoint.type = action.pointType;
+            if (stateCopy.editablePoint.type !== action.pointType) {
+                stateCopy.editablePoint.type = action.pointType;
+                stateCopy.editablePoint.offers = [];
+            }
             return stateCopy;
         }
         case TOGGLE_OFFER: {
@@ -239,10 +269,14 @@ export const tripReducer = (state = initialState, action) => {
         }
         case UPDATE_POINT: {
             const stateCopy = {
-                ...state
+                ...state,
+                points: [...state.points]
             };
             if (action.id) {
-                stateCopy.points[action.id] = {...stateCopy.editablePoint};
+                const pointIndex = stateCopy.points.findIndex((point) => {
+                    return point.id === action.id;
+                });
+                stateCopy.points[pointIndex] = {...stateCopy.editablePoint};
                 stateCopy.editablePoint = null;
             }
             return stateCopy;
@@ -284,6 +318,18 @@ export const startEditPointActionCreator = (id) => {
 
 export const updateDestinationActionCreator = (destinationName) => {
     return ({type: UPDATE_DESTINATION, destinationName})
+};
+
+export const updatePriceActionCreator = (price) => {
+    return ({type: UPDATE_PRICE, price})
+};
+
+export const updateDateToActionCreator = (dateTo) => {
+    return ({type: UPDATE_DATE_TO, dateTo})
+};
+
+export const updateDateFromActionCreator = (dateFrom) => {
+    return ({type: UPDATE_DATE_FROM, dateFrom})
 };
 
 export const updateTypeActionCreator = (pointType) => {

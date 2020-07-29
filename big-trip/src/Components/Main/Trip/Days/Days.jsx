@@ -28,16 +28,7 @@ export default function Days(props) {
     const renderDays = () => {
         const days = getDaysList();
         return days.map((day, index) => {
-            return <Day key={index} date={day} points={getPointsOfThisDay(day)} numberDay={index + 1} offers={props.offers}
-                        destinations={props.destinations}
-                        updateType={props.updateType}
-                        editablePoint={props.editablePoint}
-                        startEditPoint={props.startEditPoint}
-                        updateDestination={props.updateDestination}
-                        undoChanges={props.undoChanges}
-                        updatePoint={props.updatePoint}
-                        deletePoint={props.deletePoint}
-                        toggleOffer={props.toggleOffer}/>
+            return <Day key={index} date={day} points={getPointsOfThisDay(day)} numberDay={index + 1} />
         })
     };
 

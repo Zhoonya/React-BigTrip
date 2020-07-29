@@ -10,7 +10,7 @@ import {
     updatePointThunkCreator,
     toggleOfferActionCreator,
     deletePointThunkCreator,
-    getOffersThunkCreator, getDestinationsThunkCreator, updateTypeActionCreator
+    getOffersThunkCreator, getDestinationsThunkCreator, updateTypeActionCreator, updatePriceActionCreator
 } from "../../../../redux/trip-reducer";
 
 class DaysContainer extends React.Component {
@@ -22,17 +22,7 @@ class DaysContainer extends React.Component {
 
     render() {
         return (
-            <Days points={this.props.points} offers={this.props.offers}
-                  destinations={this.props.destinations}
-                  editablePoint={this.props.editablePoint}
-                  startEditPoint={this.props.startEditPoint}
-                  updateDestination={this.props.updateDestination}
-                  updateType={this.props.updateType}
-                  undoChanges={this.props.undoChanges}
-                  updatePoint={this.props.updatePoint}
-                  deletePoint={this.props.deletePoint}
-                  toggleOffer={this.props.toggleOffer}
-            />
+            <Days points={this.props.points} />
         )
     }
 }
@@ -40,19 +30,9 @@ class DaysContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         points: state.trip.points,
-        editablePoint: state.trip.editablePoint,
-        offers: state.trip.offers,
-        destinations: state.trip.destinations,
     };
 };
 
 export default connect(mapStateToProps, {getPoints: getPointsThunkCreator,
                                         getOffers: getOffersThunkCreator,
-                                        getDestinations: getDestinationsThunkCreator,
-                                        startEditPoint: startEditPointActionCreator,
-                                        updateDestination: updateDestinationActionCreator,
-                                        updateType: updateTypeActionCreator,
-                                        undoChanges: undoChangesActionCreator,
-                                        updatePoint: updatePointThunkCreator,
-                                        deletePoint: deletePointThunkCreator,
-                                        toggleOffer: toggleOfferActionCreator})(DaysContainer);
+                                        getDestinations: getDestinationsThunkCreator,})(DaysContainer);
