@@ -11,9 +11,9 @@ import {changeSortTypeActionCreator} from "../../../redux/trip-reducer";
 //     }
 // }
 
-function SortingContainer(){
+function SortingContainer(props){
     return(
-        <Sorting sortType={this.props.sortType} changeSortType={this.props.changeSortType}/>
+        <Sorting sortType={props.sortType} changeSortType={props.changeSortType}/>
     )
 }
 
