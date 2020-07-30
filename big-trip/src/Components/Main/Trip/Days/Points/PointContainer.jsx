@@ -4,9 +4,6 @@ import PointEdit from "./PointEdit";
 import {connect} from "react-redux";
 import {
     deletePointThunkCreator,
-    getDestinationsThunkCreator,
-    getOffersThunkCreator,
-    getPointsThunkCreator,
     startEditPointActionCreator,
     toggleOfferActionCreator,
     undoChangesActionCreator,

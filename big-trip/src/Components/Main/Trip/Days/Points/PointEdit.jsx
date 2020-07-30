@@ -2,7 +2,7 @@ import React from "react";
 import {LOCATIONS, TRANSPORTS} from "../../../../../const";
 import Details from "./Details";
 import moment from "moment";
-import flatpickr from "flatpickr";
+import Flatpickr from 'react-flatpickr'
 
 export default function PointEdit(props) {
 
@@ -18,9 +18,9 @@ export default function PointEdit(props) {
         return type[0].toUpperCase() + type.slice(1);
     };
 
-    const transformDate = (date) => {
-        return moment(date).format("DD/MM/YY HH:mm");
-    };
+    // const transformDate = (date) => {
+    //     return moment(date).format("DD/MM/YY HH:mm");
+    // };
 
     const createDestinationsList = () => {
         return props.destinations.map((destination, index) => {
@@ -112,18 +112,36 @@ export default function PointEdit(props) {
                         <label className="visually-hidden" htmlFor="event-start-time-1">
                             From
                         </label>
-                        <input onChange={(e) => {
-                            props.updateDateFrom(e.currentTarget.value)
-                        }} className="event__input  event__input--time" id="event-start-time-1" type="text"
-                               name="event-start-time" value={transformDate(props.editablePoint.date_from)} />
-                            &mdash;
+                        <Flatpickr
+                            options={{altInput: true,
+                                altFormat: `d/m/y H:i`,
+                                allowInput: true,
+                                enableTime: true,
+                                [`time_24hr`]: true,
+                                defaultDate: props.editablePoint.date_from || `today`,}}
+                                   onChange={(v) => {
+                                       props.updateDateFrom(v[0]);
+                                   }}
+                                   className="event__input  event__input--time" id="event-start-time-1" type="text"
+                               name="event-start-time" value={props.editablePoint.date_from} data-enable-time />
+
+
+                        &mdash;
                             <label className="visually-hidden" htmlFor="event-end-time-1">
                                 To
                             </label>
-                            <input onChange={(e) => {
-                                props.updateDateTo(e.currentTarget.value)
+                            <Flatpickr
+                                options={{altInput: true,
+                                    altFormat: `d/m/y H:i`,
+                                    allowInput: true,
+                                    enableTime: true,
+                                    [`time_24hr`]: true,
+                                    minDate: props.editablePoint.date_from,
+                                    defaultDate: props.editablePoint.date_to || props.editablePoint.date_from,}}
+                                onChange={(v) => {
+                                props.updateDateTo(v[0])
                             }} className="event__input  event__input--time" id="event-end-time-1" type="text"
-                                   name="event-end-time" value={transformDate(props.editablePoint.date_to)} />
+                                   name="event-end-time" value={props.editablePoint.date_to} />
                     </div>
 
                     <div className="event__field-group  event__field-group--price">

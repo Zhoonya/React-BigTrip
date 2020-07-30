@@ -3,7 +3,7 @@ import moment from "moment";
 
 export default function HeaderRoute(props) {
 
-    const points = props.points.sort((a, b) => a.date_to - b.date_to);
+    const points = props.points.sort((a, b) => new Date(a.date_to) - new Date(b.date_to));
 
     const createRouteTemplate = () => {
         if (points.length > 0) {
@@ -23,7 +23,7 @@ export default function HeaderRoute(props) {
     const createDatesTemplate = () => {
         if (points.length > 0) {
             const startDate = moment(points[0].date_from).format("MMM D");
-            const endDate = moment(points[0].date_to).format("MMM D");
+            const endDate = moment(points[points.length - 1].date_to).format("MMM D");
             return (`${startDate} - ${endDate}`);
         } else {
             return (``);

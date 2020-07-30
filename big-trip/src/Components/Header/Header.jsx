@@ -12,7 +12,7 @@ export default function Header () {
                 <div className="trip-main">
                     <HeaderInfo/>
                     <HeaderControls/>
-                    <NewEventButton/>
+                    <NewEventButton />
                 </div>
             </div>
         </header>

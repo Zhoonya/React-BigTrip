@@ -20,6 +20,27 @@ export default function PointViewing(props) {
         return type[0].toUpperCase() + type.slice(1);
     };
 
+    const getDuration = () => {
+        const difference = Math.floor((new Date(props.point.date_to) - new Date(props.point.date_from)) / 60000);
+        if (difference < 60) {
+            return (`${difference}M`);
+        } else if (difference >= 60 && difference < 1440) {
+            const hour = Math.floor(difference / 60);
+            const minute = difference - (hour * 60);
+            return (`${hour}H ${minute}M`);
+        } else {
+            let remainder = difference;
+            const day = Math.floor(difference / 1440);
+            remainder = remainder - (day * 1440);
+            const hour = Math.floor(remainder / 60);
+            remainder = remainder - (hour * 60);
+            const minute = remainder;
+            return (`${day}D ${hour}H ${minute}M`);
+        }
+    };
+
+    getDuration();
+
     const createOffersList = (offers) => {
         if (offers.length > 0) {
             const createOffers = (offers) => {
@@ -60,7 +81,7 @@ export default function PointViewing(props) {
                         <time className="event__end-time" dateTime="2019-03-18T11:00">{transformDate(props.point.date_to)}
                         </time>
                     </p>
-                    <p className="event__duration">30M</p>
+                    <p className="event__duration">{getDuration()}</p>
                 </div>
 
                 <p className="event__price">

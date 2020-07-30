@@ -1,6 +1,8 @@
 import {tripAPI} from "../api";
+import {FILTER_PARAMETER, SORT_TYPE} from "../const";
 
 const START_EDIT_POINT = "START_EDIT_POINT";
+const START_CREATE_NEW_POINT = "START_CREATE_NEW_POINT";
 const SET_POINTS = "SET_POINTS";
 const SET_OFFERS = "SET_OFFERS";
 const SET_DESTINATION = "SET_DESTINATION";
@@ -13,6 +15,8 @@ const UPDATE_DATE_FROM = "UPDATE_DATE_FROM";
 const UPDATE_DATE_TO = "UPDATE_DATE_TO";
 const TOGGLE_OFFER = "TOGGLE_OFFER";
 const DELETE_POINT = "DELETE_POINT";
+const CHANGE_SORT_TYPE = "CHANGE_SORT_TYPE";
+const CHANGE_FILTER_PARAMETER = "CHANGE_FILTER_PARAMETER";
 
 const initialState = {
     editablePoint: null,
@@ -152,6 +156,8 @@ const initialState = {
         "flight", "check-in", "sightseeing",
         "restaurant"
     ],
+    sortType: SORT_TYPE.date,
+    filterParameter: FILTER_PARAMETER.everything,
 };
 
 export const tripReducer = (state = initialState, action) => {
@@ -174,6 +180,23 @@ export const tripReducer = (state = initialState, action) => {
             const stateCopy = {
                 ...state,
                 destinations: action.destinations
+            };
+            return stateCopy;
+        }
+        case START_CREATE_NEW_POINT: {
+            const stateCopy = {
+                ...state,
+            };
+            stateCopy.editablePoint = {
+                    "base_price": null,
+                    "date_from": String(new Date()),
+                    "date_to": String(new Date()),
+                    "destination": {
+                    },
+                    "id": "new point",
+                    "is_favorite": false,
+                    "offers": [],
+                    "type": "taxi"
             };
             return stateCopy;
         }
@@ -206,7 +229,10 @@ export const tripReducer = (state = initialState, action) => {
                 ...state,
                 editablePoint: {...state.editablePoint}
             };
-            stateCopy.editablePoint.date_from = action.date_from;
+            stateCopy.editablePoint.date_from = action.dateFrom;
+            if (stateCopy.editablePoint.date_from > new Date(stateCopy.editablePoint.date_to)) {
+                stateCopy.editablePoint.date_to = stateCopy.editablePoint.date_from;
+            }
             return stateCopy;
         }
         case UPDATE_DATE_TO: {
@@ -214,7 +240,7 @@ export const tripReducer = (state = initialState, action) => {
                 ...state,
                 editablePoint: {...state.editablePoint}
             };
-            stateCopy.editablePoint.date_to = String(new Date(action.date_to));
+            stateCopy.editablePoint.date_to = action.dateTo;
             return stateCopy;
         }
         case UPDATE_PRICE: {
@@ -294,6 +320,20 @@ export const tripReducer = (state = initialState, action) => {
             }
             return stateCopy;
         }
+        case CHANGE_SORT_TYPE: {
+            const stateCopy = {
+                ...state,
+                sortType: action.sortType
+            };
+            return stateCopy;
+        }
+        case CHANGE_FILTER_PARAMETER: {
+            const stateCopy = {
+                ...state,
+                filterParameter: action.filterParameter
+            };
+            return stateCopy;
+        }
         default:
             return state;
     }
@@ -314,6 +354,10 @@ export const setDestinationsActionCreator = (destinations) => {
 
 export const startEditPointActionCreator = (id) => {
     return ({type: START_EDIT_POINT, id})
+};
+
+export const startCreateNewPointActionCreator = () => {
+    return ({type: START_CREATE_NEW_POINT})
 };
 
 export const updateDestinationActionCreator = (destinationName) => {
@@ -350,6 +394,14 @@ export const updatePointActionCreator = (id = null) => {
 
 export const deletePointActionCreator = (id) => {
     return ({type: DELETE_POINT, id})
+};
+
+export const changeSortTypeActionCreator = (sortType) => {
+    return ({type: CHANGE_SORT_TYPE, sortType})
+};
+
+export const changeFilterParameterActionCreator = (filterParameter) => {
+    return ({type: CHANGE_FILTER_PARAMETER, filterParameter})
 };
 
 export const getPointsThunkCreator = () => {
