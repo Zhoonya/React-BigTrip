@@ -6,6 +6,7 @@ import {
     getOffersThunkCreator, getDestinationsThunkCreator} from "../../../../redux/trip-reducer";
 import Points from "./Points/Points";
 import {FILTER_PARAMETER, SORT_TYPE} from "../../../../const";
+import PointEdit from "./Points/PointEdit";
 
 
 class DaysContainer extends React.Component {
@@ -22,7 +23,7 @@ class DaysContainer extends React.Component {
 
         if (this.props.sortType === SORT_TYPE.event) {
             return (
-                <Days points={points} />
+                <Days points={points} newPoint={this.props.newPoint} editablePoint={this.props.editablePoint} />
             )
         } else {
             return (
@@ -74,6 +75,7 @@ let mapStateToProps = (state) => {
         sortType: state.trip.sortType,
         filterParameter: state.trip.filterParameter,
         newPoint: state.trip.newPoint,
+        editablePoint: state.trip.editablePoint,
     };
 };
 

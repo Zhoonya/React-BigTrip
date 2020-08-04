@@ -92,7 +92,7 @@ export default function PointViewing(props) {
                 {createOffersList(props.point.offers)}
 
                 <button className="event__rollup-btn" type="button" onClick={() => {
-                    props.startEditPoint(props.point.id)
+                    props.startEditPoint(props.point.id);
                     props.activateEditMode();
                 }}>
                     <span className="visually-hidden">Open event</span>

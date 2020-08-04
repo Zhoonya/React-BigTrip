@@ -15,7 +15,7 @@ class HeaderContainer extends React.Component {
                     <div className="trip-main">
                         <HeaderInfo/>
                         <HeaderControls/>
-                        <NewEventButton editablePoint={this.props.editablePoint} startCreateNewPoint={this.props.startCreateNewPoint} />
+                        <NewEventButton newPoint={this.props.newPoint} startCreateNewPoint={this.props.startCreateNewPoint} />
                     </div>
                 </div>
             </header>
@@ -25,7 +25,7 @@ class HeaderContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return ({
-
+        newPoint: state.trip.newPoint,
     });
 };
 

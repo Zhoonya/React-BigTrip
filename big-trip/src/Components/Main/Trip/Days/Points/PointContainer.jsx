@@ -17,13 +17,13 @@ import {
 
 class PointContainer extends React.Component{
     state = {
-        editMode: false
+        editMode: this.props.editMode || false
     };
 
     activateEditMode = () => {
         this.setState({
             editMode: true,
-        })
+        });
     };
 
     deactivateEditMode = () => {
@@ -33,7 +33,7 @@ class PointContainer extends React.Component{
     };
 
     render() {
-        if (!this.state.editMode) {
+        if (!this.state.editMode || this.props.editablePoint.id !== this.props.point.id) {
             return <PointViewing point={this.props.point} activateEditMode={this.activateEditMode} startEditPoint={this.props.startEditPoint} />
         } else {
             return <PointEdit point={this.props.point} deactivateEditMode={this.deactivateEditMode}  offers={this.props.offers}
@@ -55,7 +55,7 @@ class PointContainer extends React.Component{
 
 let mapStateToProps = (state) => {
     return {
-        editablePoint: state.trip.editablePoint,
+        // editablePoint: state.trip.editablePoint,
         offers: state.trip.offers,
         destinations: state.trip.destinations,
     };

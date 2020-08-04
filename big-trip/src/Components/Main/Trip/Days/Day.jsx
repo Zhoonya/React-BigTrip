@@ -15,7 +15,7 @@ export default function Day(props) {
                 <time className="day__date" dateTime={props.date}>{transformDate(props.date)}</time>
             </div>
 
-            <Points points={props.points} />
+            <Points points={props.points} editablePoint={props.editablePoint} />
         </li>
     )
 }

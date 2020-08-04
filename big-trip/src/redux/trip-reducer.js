@@ -21,6 +21,7 @@ const CHANGE_FILTER_PARAMETER = "CHANGE_FILTER_PARAMETER";
 
 const initialState = {
     editablePoint: null,
+    newPoint: false,
     points: [
         // {
         //     "base_price": 110,
@@ -188,6 +189,7 @@ export const tripReducer = (state = initialState, action) => {
             const stateCopy = {
                 ...state,
             };
+            stateCopy.newPoint = true;
             stateCopy.editablePoint = {
                     "base_price": null,
                     "date_from": String(new Date()),
@@ -199,7 +201,6 @@ export const tripReducer = (state = initialState, action) => {
                     "offers": [],
                     "type": "taxi"
             };
-            stateCopy.newPoint = true;
             return stateCopy;
         }
         case START_EDIT_POINT: {
@@ -210,6 +211,9 @@ export const tripReducer = (state = initialState, action) => {
                 return action.id === point.id
             })[0];
             stateCopy.editablePoint = {...point};
+            if (stateCopy.newPoint) {
+                stateCopy.newPoint = false;
+            }
             return stateCopy;
         }
         case UPDATE_DESTINATION: {
@@ -299,7 +303,8 @@ export const tripReducer = (state = initialState, action) => {
         case UNDO_CHANGES: {
             const stateCopy = {
                 ...state,
-                editablePoints: null,
+                editablePoint: null,
+                newPoint: false,
             };
             return stateCopy;
         }
@@ -314,6 +319,7 @@ export const tripReducer = (state = initialState, action) => {
                 });
                 stateCopy.points[pointIndex] = {...stateCopy.editablePoint};
                 stateCopy.editablePoint = null;
+                stateCopy.newPoint = false;
             }
             return stateCopy;
         }

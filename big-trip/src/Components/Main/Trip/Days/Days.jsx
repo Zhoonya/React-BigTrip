@@ -1,6 +1,8 @@
 import React from "react";
 import Day from "./Day";
 import moment from "moment/moment";
+import PointContainer from "./Points/PointContainer";
+import Points from "./Points/Points";
 
 export default function Days(props) {
 
@@ -28,12 +30,17 @@ export default function Days(props) {
     const renderDays = () => {
         const days = getDaysList();
         return days.map((day, index) => {
-            return <Day key={index} date={day} points={getPointsOfThisDay(day)} numberDay={index + 1} />
+            return <Day key={index} date={day} points={getPointsOfThisDay(day)} numberDay={index + 1} editablePoint={props.editablePoint}/>
         })
     };
 
     return (
         <ul className="trip-days">
+            {props.newPoint ?
+                <li className="trip-days__item  day">
+                    <div className="day__info"></div>
+                    <PointContainer editablePoint={props.editablePoint}  point={props.editablePoint} editMode={true}/>
+                </li> : ""}
             {renderDays()}
         </ul>
     )
