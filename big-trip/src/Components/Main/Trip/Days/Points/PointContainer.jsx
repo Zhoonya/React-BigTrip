@@ -4,7 +4,7 @@ import PointEdit from "./PointEdit";
 import {connect} from "react-redux";
 import {
     deletePointThunkCreator,
-    startEditPointActionCreator,
+    startEditPointActionCreator, toggleFavoriteActionCreator,
     toggleOfferActionCreator,
     undoChangesActionCreator,
     updateDateFromActionCreator,
@@ -47,7 +47,8 @@ class PointContainer extends React.Component{
                               undoChanges={this.props.undoChanges}
                               updatePoint={this.props.updatePoint}
                               deletePoint={this.props.deletePoint}
-                              toggleOffer={this.props.toggleOffer} />
+                              toggleOffer={this.props.toggleOffer}
+                              toggleFavorite={this.props.toggleFavorite}/>
         }
     }
 };
@@ -69,4 +70,5 @@ export default connect(mapStateToProps, {startEditPoint: startEditPointActionCre
     undoChanges: undoChangesActionCreator,
     updatePoint: updatePointThunkCreator,
     deletePoint: deletePointThunkCreator,
-    toggleOffer: toggleOfferActionCreator})(PointContainer);
+    toggleOffer: toggleOfferActionCreator,
+    toggleFavorite: toggleFavoriteActionCreator})(PointContainer);

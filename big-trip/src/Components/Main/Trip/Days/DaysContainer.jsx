@@ -1,5 +1,4 @@
 import React from "react";
-// import StoreContext from "../../../../redux/storeContext";
 import Days from "./Days";
 import {connect} from "react-redux";
 import {
@@ -21,7 +20,7 @@ class DaysContainer extends React.Component {
         let points = this._filterPoints(this.props.points, this.props.filterParameter);
         points = this._sortPoints(points, this.props.sortType);
 
-        if (this.props.sortType === SORT_TYPE.date) {
+        if (this.props.sortType === SORT_TYPE.event) {
             return (
                 <Days points={points} />
             )
@@ -74,6 +73,7 @@ let mapStateToProps = (state) => {
         points: state.trip.points,
         sortType: state.trip.sortType,
         filterParameter: state.trip.filterParameter,
+        newPoint: state.trip.newPoint,
     };
 };
 

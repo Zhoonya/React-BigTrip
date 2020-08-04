@@ -2,7 +2,7 @@ export const TRANSPORTS = ["taxi", "bus", "train", "ship", "transport", "drive",
 export const LOCATIONS = ["sightseeing", "restaurant", "check-in"];
 
 export const SORT_TYPE = {
-    date: "sort-event",
+    event: "sort-event",
     price: "sort-price",
     duration: "sort-time",
 };

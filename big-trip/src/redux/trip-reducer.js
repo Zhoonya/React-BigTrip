@@ -14,6 +14,7 @@ const UPDATE_TYPE = "UPDATE_TYPE";
 const UPDATE_DATE_FROM = "UPDATE_DATE_FROM";
 const UPDATE_DATE_TO = "UPDATE_DATE_TO";
 const TOGGLE_OFFER = "TOGGLE_OFFER";
+const TOGGLE_FAVORITE = "TOGGLE_FAVORITE";
 const DELETE_POINT = "DELETE_POINT";
 const CHANGE_SORT_TYPE = "CHANGE_SORT_TYPE";
 const CHANGE_FILTER_PARAMETER = "CHANGE_FILTER_PARAMETER";
@@ -156,7 +157,7 @@ const initialState = {
         "flight", "check-in", "sightseeing",
         "restaurant"
     ],
-    sortType: SORT_TYPE.date,
+    sortType: SORT_TYPE.event,
     filterParameter: FILTER_PARAMETER.everything,
 };
 
@@ -198,6 +199,7 @@ export const tripReducer = (state = initialState, action) => {
                     "offers": [],
                     "type": "taxi"
             };
+            stateCopy.newPoint = true;
             return stateCopy;
         }
         case START_EDIT_POINT: {
@@ -249,6 +251,14 @@ export const tripReducer = (state = initialState, action) => {
                 editablePoint: {...state.editablePoint}
             };
             stateCopy.editablePoint.base_price = Number(action.price);
+            return stateCopy;
+        }
+        case TOGGLE_FAVORITE: {
+            const stateCopy = {
+                ...state,
+                editablePoint: {...state.editablePoint}
+            };
+            stateCopy.editablePoint.is_favorite = !stateCopy.editablePoint.is_favorite;
             return stateCopy;
         }
         case UPDATE_TYPE: {
@@ -390,6 +400,10 @@ export const undoChangesActionCreator = () => {
 
 export const updatePointActionCreator = (id = null) => {
     return ({type: UPDATE_POINT, id})
+};
+
+export const toggleFavoriteActionCreator = () => {
+    return ({type: TOGGLE_FAVORITE})
 };
 
 export const deletePointActionCreator = (id) => {

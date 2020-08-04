@@ -1,7 +1,6 @@
 import React from "react";
 import {LOCATIONS, TRANSPORTS} from "../../../../../const";
 import Details from "./Details";
-import moment from "moment";
 import Flatpickr from 'react-flatpickr'
 
 export default function PointEdit(props) {
@@ -167,8 +166,8 @@ export default function PointEdit(props) {
                         props.deactivateEditMode();
                     }} className="event__reset-btn" type="reset">Delete</button>
 
-                    <input id="event-favorite-1" className="event__favorite-checkbox  visually-hidden" type="checkbox"
-                           name="event-favorite" checked />
+                    <input onChange={props.toggleFavorite} id="event-favorite-1" className="event__favorite-checkbox  visually-hidden" type="checkbox"
+                           name="event-favorite" checked={props.editablePoint.is_favorite} />
                         <label className="event__favorite-btn" htmlFor="event-favorite-1">
                             <span className="visually-hidden">Add to favorite</span>
                             <svg className="event__favorite-icon" width="28" height="28" viewBox="0 0 28 28">
