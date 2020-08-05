@@ -8,6 +8,7 @@ const SET_OFFERS = "SET_OFFERS";
 const SET_DESTINATION = "SET_DESTINATION";
 const UNDO_CHANGES = "UNDO_CHANGES";
 const UPDATE_POINT = "UPDATE_POINT";
+const CREATE_POINT = "CREATE_POINT";
 const UPDATE_DESTINATION = "UPDATE_DESTINATION";
 const UPDATE_PRICE = "UPDATE_PRICE";
 const UPDATE_TYPE = "UPDATE_TYPE";
@@ -192,8 +193,8 @@ export const tripReducer = (state = initialState, action) => {
             stateCopy.newPoint = true;
             stateCopy.editablePoint = {
                     "base_price": null,
-                    "date_from": String(new Date()),
-                    "date_to": String(new Date()),
+                    "date_from": new Date(),
+                    "date_to": new Date(),
                     "destination": {
                     },
                     "id": "new point",
@@ -323,6 +324,18 @@ export const tripReducer = (state = initialState, action) => {
             }
             return stateCopy;
         }
+        case CREATE_POINT: {
+            const stateCopy = {
+                ...state,
+                points: [...state.points]
+            };
+
+            stateCopy.points = [...stateCopy.points, {...action.data}];
+
+            stateCopy.editablePoint = null;
+            stateCopy.newPoint = false;
+            return stateCopy;
+        }
         case DELETE_POINT: {
             const stateCopy = {
                 ...state,
@@ -408,6 +421,10 @@ export const updatePointActionCreator = (id = null) => {
     return ({type: UPDATE_POINT, id})
 };
 
+export const createPointActionCreator = (data) => {
+    return ({type: CREATE_POINT, data})
+};
+
 export const toggleFavoriteActionCreator = () => {
     return ({type: TOGGLE_FAVORITE})
 };
@@ -457,6 +474,17 @@ export const updatePointThunkCreator = (id, data) => {
             .then((response) => {
                 if (response.status === 200) {
                     dispatch(updatePointActionCreator(id));
+                }
+            });
+    });
+};
+
+export const createPointThunkCreator = (data) => {
+    return ((dispatch) => {
+        tripAPI.createPoint(data)
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch(createPointActionCreator(response.data));
                 }
             });
     });

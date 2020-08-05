@@ -55,11 +55,11 @@ export const tripAPI = {
         )
     },
 
-    addNewPoint: () => {
+    createPoint: (data) => {
         return (
-            instanceAxios.get("destinations")
+            instanceAxios.post("points", data)
                 .then((response) => {
-                    return response.data;
+                    return response;
                 })
         )
     }

@@ -39,7 +39,7 @@ export default function Days(props) {
             {props.newPoint ?
                 <li className="trip-days__item  day">
                     <div className="day__info"></div>
-                    <PointContainer editablePoint={props.editablePoint}  point={props.editablePoint} editMode={true}/>
+                    <PointContainer newPoint={props.newPoint} editablePoint={props.editablePoint}  point={props.editablePoint} editMode={true}/>
                 </li> : ""}
             {renderDays()}
         </ul>

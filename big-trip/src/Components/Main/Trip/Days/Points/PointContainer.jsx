@@ -3,6 +3,7 @@ import PointViewing from "./PointViewing";
 import PointEdit from "./PointEdit";
 import {connect} from "react-redux";
 import {
+    createPointThunkCreator,
     deletePointThunkCreator,
     startEditPointActionCreator, toggleFavoriteActionCreator,
     toggleOfferActionCreator,
@@ -14,6 +15,7 @@ import {
     updatePriceActionCreator,
     updateTypeActionCreator
 } from "../../../../../redux/trip-reducer";
+import PointCreating from "./PointCreating";
 
 class PointContainer extends React.Component{
     state = {
@@ -33,10 +35,25 @@ class PointContainer extends React.Component{
     };
 
     render() {
-        if (!this.state.editMode || this.props.editablePoint.id !== this.props.point.id) {
-            return <PointViewing point={this.props.point} activateEditMode={this.activateEditMode} startEditPoint={this.props.startEditPoint} />
+        if (this.props.newPoint) {
+            return <PointCreating deactivateEditMode={this.deactivateEditMode}
+                                  offers={this.props.offers}
+                                  destinations={this.props.destinations}
+                                  editablePoint={this.props.editablePoint}
+                                  updateDestination={this.props.updateDestination}
+                                  updatePrice={this.props.updatePrice}
+                                  updateDateTo={this.props.updateDateTo}
+                                  updateDateFrom={this.props.updateDateFrom}
+                                  updateType={this.props.updateType}
+                                  undoChanges={this.props.undoChanges}
+                                  createPoint={this.props.createPoint}
+                                  toggleOffer={this.props.toggleOffer} />
+        } else if (!this.state.editMode || this.props.editablePoint.id !== this.props.point.id) {
+            return <PointViewing point={this.props.point} activateEditMode={this.activateEditMode}
+                                 startEditPoint={this.props.startEditPoint} />
         } else {
-            return <PointEdit point={this.props.point} deactivateEditMode={this.deactivateEditMode}  offers={this.props.offers}
+            return <PointEdit point={this.props.point} deactivateEditMode={this.deactivateEditMode}
+                              offers={this.props.offers}
                               destinations={this.props.destinations}
                               editablePoint={this.props.editablePoint}
                               updateDestination={this.props.updateDestination}
@@ -69,6 +86,7 @@ export default connect(mapStateToProps, {startEditPoint: startEditPointActionCre
     updateType: updateTypeActionCreator,
     undoChanges: undoChangesActionCreator,
     updatePoint: updatePointThunkCreator,
+    createPoint: createPointThunkCreator,
     deletePoint: deletePointThunkCreator,
     toggleOffer: toggleOfferActionCreator,
     toggleFavorite: toggleFavoriteActionCreator})(PointContainer);
