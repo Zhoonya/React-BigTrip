@@ -191,11 +191,14 @@ export const tripReducer = (state = initialState, action) => {
                 ...state,
             };
             stateCopy.newPoint = true;
+            stateCopy.sortType = SORT_TYPE.event;
+            stateCopy.filterParameter = FILTER_PARAMETER.everything;
             stateCopy.editablePoint = {
-                    "base_price": null,
+                    "base_price": "",
                     "date_from": new Date(),
                     "date_to": new Date(),
                     "destination": {
+                        name: "",
                     },
                     "id": "new point",
                     "is_favorite": false,
@@ -222,6 +225,7 @@ export const tripReducer = (state = initialState, action) => {
                 ...state,
                 editablePoint: {...state.editablePoint}
             };
+            console.log(action.destinationName);
             let destination = stateCopy.destinations.filter((destination) => {
                 return destination.name === action.destinationName;
             });
@@ -284,10 +288,20 @@ export const tripReducer = (state = initialState, action) => {
             };
             stateCopy.editablePoint.offers = [...stateCopy.editablePoint.offers];
             const checkedOffers = stateCopy.editablePoint.offers;
-            const offerTitle = action.offerName.split("-").join(" ");
+
+            let offerTitle;
+            if (action.offerName === "Choose-the-time-of-check-out") {
+                offerTitle = "Choose the time of check-out"
+            } else if (action.offerName === "Choose-the-time-of-check-in") {
+                offerTitle = "Choose the time of check-in"
+            } else {
+                offerTitle = action.offerName.split("-").join(" ");
+            }
+
             const offerId = checkedOffers.findIndex((offer) => {
                 return offer.title === offerTitle;
             });
+
             if (offerId !== -1) {
                 stateCopy.editablePoint.offers.splice(offerId, 1);
             } else {
@@ -354,6 +368,10 @@ export const tripReducer = (state = initialState, action) => {
                 ...state,
                 sortType: action.sortType
             };
+            if (stateCopy.newPoint) {
+                stateCopy.newPoint = false;
+                stateCopy.editablePoint = null;
+            }
             return stateCopy;
         }
         case CHANGE_FILTER_PARAMETER: {

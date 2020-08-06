@@ -24,7 +24,7 @@ export default function PointEdit(props) {
     const createDestinationsList = () => {
         return props.destinations.map((destination, index) => {
             return (
-                <option key={index} value={destination.name}></option>
+                <option key={destination.name} value={destination.name}></option>
             )
         })
     };
@@ -36,7 +36,7 @@ export default function PointEdit(props) {
                 TRANSPORTS.map((type) => {
                     const isChecked = props.editablePoint.type === type;
                     return (
-                        <div className="event__type-item">
+                        <div className="event__type-item" key={type}>
                             <input onChange={(e) => {
                                 props.updateType(e.currentTarget.value);
                             }} id={`event-type-${type}-1`} className="event__type-input  visually-hidden"
@@ -54,7 +54,7 @@ export default function PointEdit(props) {
                 LOCATIONS.map((type) => {
                     const isChecked = props.editablePoint.type === type;
                     return (
-                        <div className="event__type-item">
+                        <div className="event__type-item" key={type}>
                             <input onChange={(e) => {
                                 props.updateType(e.currentTarget.value);
                             }} id={`event-type-${type}-1`} className="event__type-input  visually-hidden"
@@ -158,12 +158,10 @@ export default function PointEdit(props) {
                             onClick={(e) => {
                                 e.preventDefault();
                                 props.updatePoint(props.editablePoint.id, props.editablePoint);
-                                props.deactivateEditMode();
                             }}>Save</button>
                     <button onClick={(e) => {
                         e.preventDefault();
                         props.deletePoint(props.editablePoint.id);
-                        props.deactivateEditMode();
                     }} className="event__reset-btn" type="reset">Delete</button>
 
                     <input onChange={props.toggleFavorite} id="event-favorite-1" className="event__favorite-checkbox  visually-hidden" type="checkbox"
@@ -177,7 +175,6 @@ export default function PointEdit(props) {
                         </label>
 
                         <button className="event__rollup-btn" type="button" onClick={() => {
-                            props.deactivateEditMode();
                             props.undoChanges()}}>
                             <span className="visually-hidden">Open event</span>
                         </button>

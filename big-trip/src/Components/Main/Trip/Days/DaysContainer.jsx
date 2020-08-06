@@ -23,7 +23,7 @@ class DaysContainer extends React.Component {
 
         if (this.props.sortType === SORT_TYPE.event) {
             return (
-                <Days points={points} newPoint={this.props.newPoint} editablePoint={this.props.editablePoint} />
+                <Days points={points} newPoint={this.props.newPoint}/>
             )
         } else {
             return (
@@ -75,7 +75,6 @@ let mapStateToProps = (state) => {
         sortType: state.trip.sortType,
         filterParameter: state.trip.filterParameter,
         newPoint: state.trip.newPoint,
-        editablePoint: state.trip.editablePoint,
     };
 };
 

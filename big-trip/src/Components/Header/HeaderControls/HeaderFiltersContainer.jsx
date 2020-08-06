@@ -13,13 +13,14 @@ import {changeFilterParameterActionCreator} from "../../../redux/trip-reducer";
 
 function HeaderFiltersContainer(props) {
     return (
-        <HeaderFilters changeFilterParameter={props.changeFilterParameter} />
+        <HeaderFilters changeFilterParameter={props.changeFilterParameter} points={props.points}/>
     )
 }
 
 const mapStateToProps = (state) => {
     return ({
-        filterParameter: state.trip.filterParameter
+        filterParameter: state.trip.filterParameter,
+        points: state.trip.points,
     })
 };
 

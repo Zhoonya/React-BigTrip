@@ -93,7 +93,6 @@ export default function PointViewing(props) {
 
                 <button className="event__rollup-btn" type="button" onClick={() => {
                     props.startEditPoint(props.point.id);
-                    props.activateEditMode();
                 }}>
                     <span className="visually-hidden">Open event</span>
                 </button>

@@ -12,14 +12,14 @@ export default function Details(props) {
         });
 
         if (offers.length > 0) {
-            const offersList = offers.map((offer, index) => {
+            const offersList = offers.map((offer) => {
                 const isChecked = checkedOffers.includes(offer.title);
                 const offerId = offer.title.split(" ").join("-");
                 return (
-                    <div className="event__offer-selector" key={index}>
+                    <div className="event__offer-selector" key={offer.title}>
                         <input onChange={(e) => {props.toggleOffer(e.currentTarget.id, props.editablePoint.type)}}
                                className="event__offer-checkbox  visually-hidden" id={offerId}
-                               type="checkbox" name="event-offer-luggage" checked={isChecked} />
+                               type="checkbox" name={offerId} checked={isChecked} />
                         <label className="event__offer-label" htmlFor={offerId}>
                             <span className="event__offer-title">{offer.title}</span>
                             &nbsp;+&nbsp;&euro;&nbsp;
@@ -50,7 +50,7 @@ export default function Details(props) {
                     return (
                         props.editablePoint.destination.pictures.map((picture) => {
                             return (
-                                <img className="event__photo" src={picture.src} alt={picture.description}  />
+                                <img key={picture.src} className="event__photo" src={picture.src} alt={picture.description}  />
                             )
                         })
                     )

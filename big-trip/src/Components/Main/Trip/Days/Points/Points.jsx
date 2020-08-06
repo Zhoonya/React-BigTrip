@@ -5,7 +5,7 @@ export default function Points(props) {
 
     const renderPoints = () => {
         return props.points.map((point) => {
-            return <PointContainer key={point.index} point={point} editablePoint={props.editablePoint}/>
+            return <PointContainer key={point.id} point={point} editablePoint={props.editablePoint}/>
         })
     };
 

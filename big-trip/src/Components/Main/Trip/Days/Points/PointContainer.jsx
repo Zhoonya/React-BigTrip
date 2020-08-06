@@ -22,22 +22,21 @@ class PointContainer extends React.Component{
         editMode: this.props.editMode || false
     };
 
-    activateEditMode = () => {
-        this.setState({
-            editMode: true,
-        });
-    };
-
-    deactivateEditMode = () => {
-        this.setState({
-            editMode: false,
-        })
-    };
+    // activateEditMode = () => {
+    //     this.setState({
+    //         editMode: true,
+    //     });
+    // };
+    //
+    // deactivateEditMode = () => {
+    //     this.setState({
+    //         editMode: false,
+    //     });
+    // };
 
     render() {
         if (this.props.newPoint) {
-            return <PointCreating deactivateEditMode={this.deactivateEditMode}
-                                  offers={this.props.offers}
+            return <PointCreating offers={this.props.offers}
                                   destinations={this.props.destinations}
                                   editablePoint={this.props.editablePoint}
                                   updateDestination={this.props.updateDestination}
@@ -48,11 +47,8 @@ class PointContainer extends React.Component{
                                   undoChanges={this.props.undoChanges}
                                   createPoint={this.props.createPoint}
                                   toggleOffer={this.props.toggleOffer} />
-        } else if (!this.state.editMode || this.props.editablePoint.id !== this.props.point.id) {
-            return <PointViewing point={this.props.point} activateEditMode={this.activateEditMode}
-                                 startEditPoint={this.props.startEditPoint} />
-        } else {
-            return <PointEdit point={this.props.point} deactivateEditMode={this.deactivateEditMode}
+        } else if (this.props.editablePoint && this.props.editablePoint.id === this.props.point.id) {
+            return <PointEdit point={this.props.point}
                               offers={this.props.offers}
                               destinations={this.props.destinations}
                               editablePoint={this.props.editablePoint}
@@ -66,13 +62,15 @@ class PointContainer extends React.Component{
                               deletePoint={this.props.deletePoint}
                               toggleOffer={this.props.toggleOffer}
                               toggleFavorite={this.props.toggleFavorite}/>
+        } else {
+            return <PointViewing point={this.props.point} startEditPoint={this.props.startEditPoint} />
         }
     }
 };
 
 let mapStateToProps = (state) => {
     return {
-        // editablePoint: state.trip.editablePoint,
+        editablePoint: state.trip.editablePoint,
         offers: state.trip.offers,
         destinations: state.trip.destinations,
     };

@@ -5,6 +5,7 @@ import HeaderControls from "./HeaderControls/HeaderControls";
 import NewEventButton from "./NewEventButton";
 import {startCreateNewPointActionCreator} from "../../redux/trip-reducer";
 import {connect} from "react-redux";
+import {FILTER_PARAMETER, SORT_TYPE} from "../../const";
 
 class HeaderContainer extends React.Component {
     render() {
