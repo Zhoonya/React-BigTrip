@@ -18,7 +18,7 @@ export default function PointCreating(props) {
     };
 
     const createDestinationsList = () => {
-        return props.destinations.map((destination, index) => {
+        return props.destinations.map((destination) => {
             return (
                 <option key={destination.name} value={destination.name}></option>
             )

@@ -17,12 +17,8 @@ export default function PointEdit(props) {
         return type[0].toUpperCase() + type.slice(1);
     };
 
-    // const transformDate = (date) => {
-    //     return moment(date).format("DD/MM/YY HH:mm");
-    // };
-
     const createDestinationsList = () => {
-        return props.destinations.map((destination, index) => {
+        return props.destinations.map((destination) => {
             return (
                 <option key={destination.name} value={destination.name}></option>
             )
@@ -154,18 +150,19 @@ export default function PointEdit(props) {
                                name="event-price" value={props.editablePoint.base_price} />
                     </div>
 
-                    <button className="event__save-btn  btn  btn--blue" type="submit"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                props.updatePoint(props.editablePoint.id, props.editablePoint);
-                            }}>Save</button>
-                    <button onClick={(e) => {
-                        e.preventDefault();
-                        props.deletePoint(props.editablePoint.id);
-                    }} className="event__reset-btn" type="reset">Delete</button>
-
-                    <input onChange={props.toggleFavorite} id="event-favorite-1" className="event__favorite-checkbox  visually-hidden" type="checkbox"
-                           name="event-favorite" checked={props.editablePoint.is_favorite} />
+                    {!props.newPoint ?
+                    <>
+                        <button className="event__save-btn  btn  btn--blue" type="submit"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    props.updatePoint(props.editablePoint.id, props.editablePoint);
+                                }}>Save</button>
+                        <button onClick={(e) => {
+                            e.preventDefault();
+                            props.deletePoint(props.editablePoint.id);
+                        }} className="event__reset-btn" type="reset">Delete</button>
+                        <input onChange={props.toggleFavorite} id="event-favorite-1" className="event__favorite-checkbox  visually-hidden" type="checkbox"
+                               name="event-favorite" checked={props.editablePoint.is_favorite} />
                         <label className="event__favorite-btn" htmlFor="event-favorite-1">
                             <span className="visually-hidden">Add to favorite</span>
                             <svg className="event__favorite-icon" width="28" height="28" viewBox="0 0 28 28">
@@ -173,11 +170,26 @@ export default function PointEdit(props) {
                                     d="M14 21l-8.22899 4.3262 1.57159-9.1631L.685209 9.67376 9.8855 8.33688 14 0l4.1145 8.33688 9.2003 1.33688-6.6574 6.48934 1.5716 9.1631L14 21z"/>
                             </svg>
                         </label>
-
                         <button className="event__rollup-btn" type="button" onClick={() => {
                             props.undoChanges()}}>
                             <span className="visually-hidden">Open event</span>
                         </button>
+
+                    </>
+                        :
+                        <>
+                            <button className="event__save-btn  btn  btn--blue" type="submit"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        props.createPoint(props.editablePoint);
+                                    }}>Save</button>
+                            <button onClick={(e) => {
+                                e.preventDefault();
+                                props.undoChanges();
+                            }} className="event__reset-btn" type="reset">Cancel</button>
+                        </>
+                    }
+
                 </header>
 
                 <Details editablePoint={props.editablePoint} offers={props.offers} destinations={props.destinations} toggleOffer={props.toggleOffer}/>

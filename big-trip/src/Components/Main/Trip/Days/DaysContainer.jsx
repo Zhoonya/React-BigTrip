@@ -5,8 +5,8 @@ import {
     getPointsThunkCreator,
     getOffersThunkCreator, getDestinationsThunkCreator} from "../../../../redux/trip-reducer";
 import Points from "./Points/Points";
-import {FILTER_PARAMETER, SORT_TYPE} from "../../../../const";
-import PointEdit from "./Points/PointEdit";
+import {SORT_TYPE} from "../../../../const";
+import {filterPoints} from "../../../../common";
 
 
 class DaysContainer extends React.Component {
@@ -53,19 +53,7 @@ class DaysContainer extends React.Component {
     }
 
     _filterPoints(points, filterParameter) {
-        const now = new Date;
-        switch (filterParameter) {
-            case FILTER_PARAMETER.future:
-                return points.slice().filter((point) => {
-                    return new Date(point.date_from) > now;
-                });
-            case FILTER_PARAMETER.past:
-                return points.slice().filter((point) => {
-                    return new Date(point.date_to) < now;
-                });
-            default:
-                return points;
-        }
+        return filterPoints(points, filterParameter);
     }
 }
 

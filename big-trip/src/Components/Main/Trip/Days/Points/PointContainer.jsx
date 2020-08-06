@@ -35,23 +35,25 @@ class PointContainer extends React.Component{
     // };
 
     render() {
-        if (this.props.newPoint) {
-            return <PointCreating offers={this.props.offers}
-                                  destinations={this.props.destinations}
-                                  editablePoint={this.props.editablePoint}
-                                  updateDestination={this.props.updateDestination}
-                                  updatePrice={this.props.updatePrice}
-                                  updateDateTo={this.props.updateDateTo}
-                                  updateDateFrom={this.props.updateDateFrom}
-                                  updateType={this.props.updateType}
-                                  undoChanges={this.props.undoChanges}
-                                  createPoint={this.props.createPoint}
-                                  toggleOffer={this.props.toggleOffer} />
-        } else if (this.props.editablePoint && this.props.editablePoint.id === this.props.point.id) {
+        // if (this.props.newPoint) {
+        //     return <PointCreating offers={this.props.offers}
+        //                           destinations={this.props.destinations}
+        //                           editablePoint={this.props.editablePoint}
+        //                           updateDestination={this.props.updateDestination}
+        //                           updatePrice={this.props.updatePrice}
+        //                           updateDateTo={this.props.updateDateTo}
+        //                           updateDateFrom={this.props.updateDateFrom}
+        //                           updateType={this.props.updateType}
+        //                           undoChanges={this.props.undoChanges}
+        //                           createPoint={this.props.createPoint}
+        //                           toggleOffer={this.props.toggleOffer} />
+        // } else
+        if (this.props.editablePoint && ( this.props.newPoint || this.props.editablePoint.id === this.props.point.id )) {
             return <PointEdit point={this.props.point}
                               offers={this.props.offers}
                               destinations={this.props.destinations}
                               editablePoint={this.props.editablePoint}
+                              newPoint={this.props.newPoint}
                               updateDestination={this.props.updateDestination}
                               updatePrice={this.props.updatePrice}
                               updateDateTo={this.props.updateDateTo}
@@ -59,6 +61,7 @@ class PointContainer extends React.Component{
                               updateType={this.props.updateType}
                               undoChanges={this.props.undoChanges}
                               updatePoint={this.props.updatePoint}
+                              createPoint={this.props.createPoint}
                               deletePoint={this.props.deletePoint}
                               toggleOffer={this.props.toggleOffer}
                               toggleFavorite={this.props.toggleFavorite}/>

@@ -1,25 +1,11 @@
 import React from "react";
-import {FILTER_PARAMETER} from "../../../const";
+import {filterPoints} from "../../../common";
 
 export default function HeaderFilters(props) {
 
     const isDisabled = (filterParameter) => {
-        const now = new Date();
-        const points = () => {
-            switch (filterParameter) {
-                case FILTER_PARAMETER.future:
-                    return props.points.slice().filter((point) => {
-                        return new Date(point.date_from) > now;
-                    });
-                case FILTER_PARAMETER.past:
-                    return  props.points.slice().filter((point) => {
-                        return new Date(point.date_to) < now;
-                    });
-                default:
-                    return props.points;
-            }
-        };
-        return !(points().length > 0);
+        const points = filterPoints(props.points, filterParameter);
+        return !(points.length > 0);
     };
 
     return (
