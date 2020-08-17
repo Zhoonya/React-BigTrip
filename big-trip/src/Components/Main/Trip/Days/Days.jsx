@@ -23,6 +23,7 @@ export default function Days(props) {
     const getPointsOfThisDay = (date) => {
         return props.points.filter((point) => {
             const pointDate = new Date(point.date_from);
+
             return date.getDate() === pointDate.getDate() && date.getMonth() === pointDate.getMonth() && date.getFullYear() === pointDate.getFullYear();
         })
     };
@@ -30,7 +31,7 @@ export default function Days(props) {
     const renderDays = () => {
         const days = getDaysList();
         return days.map((day, index) => {
-            return <Day key={index} date={day} points={getPointsOfThisDay(day)} numberDay={index + 1} editablePoint={props.editablePoint}/>
+            return <Day key={day} date={day} points={getPointsOfThisDay(day)} numberDay={index + 1} editablePoint={props.editablePoint}/>
         })
     };
 

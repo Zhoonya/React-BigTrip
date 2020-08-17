@@ -225,7 +225,6 @@ export const tripReducer = (state = initialState, action) => {
                 ...state,
                 editablePoint: {...state.editablePoint}
             };
-            console.log(action.destinationName);
             let destination = stateCopy.destinations.filter((destination) => {
                 return destination.name === action.destinationName;
             });
@@ -341,11 +340,8 @@ export const tripReducer = (state = initialState, action) => {
         case CREATE_POINT: {
             const stateCopy = {
                 ...state,
-                points: [...state.points]
+                points: [...state.points, {...action.data}]
             };
-
-            stateCopy.points = [...stateCopy.points, {...action.data}];
-
             stateCopy.editablePoint = null;
             stateCopy.newPoint = false;
             return stateCopy;

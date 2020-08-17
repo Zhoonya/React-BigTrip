@@ -48,7 +48,9 @@ class DaysContainer extends React.Component {
                     return (new Date(a.date_to) - new Date(a.date_from)) - (new Date(b.date_to) - new Date(b.date_from));
                 });
             default:
-                return points;
+                return points.sort((a, b) => {
+                    return new Date(a.date_to) - new Date(b.date_to);
+                });
         }
     }
 

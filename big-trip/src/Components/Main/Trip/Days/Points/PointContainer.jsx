@@ -35,6 +35,7 @@ class PointContainer extends React.Component{
     // };
 
     render() {
+        // console.log(this.props.point.id, " render");
         // if (this.props.newPoint) {
         //     return <PointCreating offers={this.props.offers}
         //                           destinations={this.props.destinations}
