@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5cc6b261-6390-45da-8c71-89df4aab09e8" name="Default Changelist" comment="Refactoring.">
+    <list default="true" id="5cc6b261-6390-45da-8c71-89df4aab09e8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-trip/src/Components/Main/Trip/Days/Days.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/big-trip/src/Components/Main/Trip/Days/Days.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-trip/src/Components/Main/Trip/Days/DaysContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/big-trip/src/Components/Main/Trip/Days/DaysContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-trip/src/Components/Main/Trip/Days/Points/PointContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/big-trip/src/Components/Main/Trip/Days/Points/PointContainer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-trip/src/redux/trip-reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/big-trip/src/redux/trip-reducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +73,8 @@
       <workItem from="1596007826678" duration="20317000" />
       <workItem from="1596094125729" duration="57655000" />
       <workItem from="1597226871211" duration="1047000" />
-      <workItem from="1597650200366" duration="7282000" />
+      <workItem from="1597650200366" duration="12754000" />
+      <workItem from="1597750763149" duration="1279000" />
     </task>
     <task id="LOCAL-00001" summary="Without flatpickr">
       <created>1596016345690</created>
@@ -140,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596699633757</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Сортировка при добавлении новой точки.">
+      <created>1597664955368</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1597664955368</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,7 +160,8 @@
     <MESSAGE value="New point (in the process)." />
     <MESSAGE value="New point." />
     <MESSAGE value="Refactoring." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring." />
+    <MESSAGE value="Сортировка при добавлении новой точки." />
+    <option name="LAST_COMMIT_MESSAGE" value="Сортировка при добавлении новой точки." />
   </component>
   <component name="WindowStateProjectService">
     <state x="486" y="197" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595229839021">
@@ -165,26 +172,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="436" y="100" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1596108452176" />
-    <state x="320" y="0" key="CommitChangelistDialog2" timestamp="1597664632273">
+    <state x="320" y="0" key="CommitChangelistDialog2" timestamp="1597664953410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="320" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1597664632273" />
+    <state x="320" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1597664953410" />
     <state x="499" y="110" key="FileChooserDialogImpl" timestamp="1596634028319">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="110" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1596634028319" />
-    <state x="261" y="80" key="Vcs.Push.Dialog.v2" timestamp="1596699644994">
+    <state x="261" y="80" key="Vcs.Push.Dialog.v2" timestamp="1597664960405">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="261" y="80" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1596699644994" />
+    <state x="261" y="80" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1597664960405" />
     <state x="546" y="309" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596016302488">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="546" y="309" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1596016302488" />
-    <state x="398" y="58" width="892" height="766" key="find.popup" timestamp="1597654203475">
+    <state x="398" y="58" width="892" height="766" key="find.popup" timestamp="1597665561839">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="398" y="58" width="892" height="766" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1597654203475" />
+    <state x="398" y="58" width="892" height="766" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1597665561839" />
     <state x="341" y="183" key="run.anything.popup" timestamp="1596545002639">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -264,7 +264,7 @@ export const tripReducer = (state = initialState, action) => {
         case TOGGLE_FAVORITE: {
             const stateCopy = {
                 ...state,
-                editablePoint: {...state.editablePoint}
+                editablePoint: {...state.editablePoint},
             };
             stateCopy.editablePoint.is_favorite = !stateCopy.editablePoint.is_favorite;
             return stateCopy;
@@ -340,23 +340,19 @@ export const tripReducer = (state = initialState, action) => {
         case CREATE_POINT: {
             const stateCopy = {
                 ...state,
-                points: [...state.points, {...action.data}]
+                points: [...state.points, {...action.data},],
+                editablePoint: null,
+                newPoint: false,
             };
-            stateCopy.editablePoint = null;
-            stateCopy.newPoint = false;
             return stateCopy;
         }
         case DELETE_POINT: {
             const stateCopy = {
                 ...state,
-                points: [...state.points]
             };
-            const pointIndex = stateCopy.points.findIndex((point) => {
-                return point.id === action.id;
+            stateCopy.points = stateCopy.points.filter((point) => {
+                return point.id !== action.id;
             });
-            if (pointIndex !== -1) {
-                stateCopy.points = stateCopy.points.slice(0, pointIndex).concat(stateCopy.points.slice(pointIndex + 1));
-            }
             return stateCopy;
         }
         case CHANGE_SORT_TYPE: {
